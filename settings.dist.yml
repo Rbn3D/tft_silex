@@ -6,3 +6,9 @@ disqus.audsync.accesstokenurl: ~
 
 disqus.forumname: ~
 disqus.basesiteurl: ~ # Must match the configured forum domain (even if it's localhost)
+
+mysql:
+	host: ~
+	username: ~
+	password: ~
+	database: ~
