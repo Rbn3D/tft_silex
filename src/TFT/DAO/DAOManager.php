@@ -16,7 +16,6 @@ class DAOManager
 
     public function __construct($connectionSettings)
     {
-        $this->app = $app;
         $this->readConnectionSettings($connectionSettings);
     }
 

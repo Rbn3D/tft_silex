@@ -9,7 +9,7 @@ abstract class BaseDAO
     private $password;
 	private $database;
 
-	private $connection;
+	protected $connection;
 
 	public function __construct($host, $username, $password, $database)
 	{
@@ -35,13 +35,34 @@ abstract class BaseDAO
 	{
 		try
 		{
-			@$conection->close();
+			@$this->conection->close();
 		}
 	}
 
 	public abstract function queryAll();
 	//public abstract function queryAllBy($column, $value);
+	public abstract function exists($column, $value);
 	public abstract function queryOneBy($column, $value);
 	public abstract function save($obj);
 	public abstract function delete($obj);
+
+	protected abstract function build($values);
+
+	public function executeQuery($sql)
+	{
+		$query = $this->connection->query($sql);
+		return $query;
+	}
+
+	public function executeInsert($sql)
+	{
+		$this->connection->query($sql);
+		return $this->connection->insert_id;
+	}
+
+	public function executeUpdate($sql)
+	{
+		$this->connection->query($sql);
+		return $this->connection->affected_rows;
+	}
 }
