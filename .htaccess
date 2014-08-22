@@ -1,0 +1,3 @@
+<FilesMatch ./*.yml>
+	Deny from All
+</FilesMatch>
