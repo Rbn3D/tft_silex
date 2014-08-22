@@ -2,9 +2,11 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$app = new Silex\Application();
+$app = new SilexExtensions\ExtendedSilexApplication();
+$app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new DerAlex\Silex\YamlConfigServiceProvider(__DIR__ . '/../settings.yml'));
 $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__. '/../views'));
+
 
 $app['debug'] = true;
 
@@ -14,18 +16,18 @@ $disqus = $app['controllers_factory'];
 
 $disqus->get('/as_callback', function (Symfony\Component\HttpFoundation\Request $request) use ($app)
 {
-	if(isset($request->attributes->parameters['verify']))
+	if($request->query->get('verify', false))
 	{
 		// Return terms of service
-
+		
 	}
 	else
 	{
 		// Get the access token
 
 		// Get the code for request access
-	    $code = $request->attributes->parameters['code'];
-	    $audiencesync_uri = urldecode($request->attributes->parameters['audiencesync_uri']);
+	    $code = $request->query->get('code');
+	    $audiencesync_uri = urldecode($request->query->get('audiencesync_uri'));
 
 	    // Request the access token
 	    extract($_POST);
@@ -33,12 +35,13 @@ $disqus->get('/as_callback', function (Symfony\Component\HttpFoundation\Request 
 	    $url = 'https://disqus.com/api/oauth/2.0/access_token/';
 	    $fields = array(
 		    'grant_type'=>urlencode("audiencesync"),
-		    'client_id'=>urlencode(constant("DisqusApiPublic")),
-		    'client_secret'=>urlencode(constant("DisqusApiSecret")),
-		    'redirect_uri'=>urlencode(constant("BaseSitePath") . 'as-callback.php?verify=1'),
+		    'client_id'=>urlencode($app["config"]["disqus.audsync.publickey"]),
+		    'client_secret'=>urlencode($app["config"]["disqus.audsync.secret"]),
+		    'redirect_uri'=>urlencode($app->url('disqus_as_callback') . '?verify=1'),
 		    'code'=>urlencode($code)
 	    );
 
+	    $fields_string = "";
 	    //url-ify the data for the POST
 	    foreach($fields as $key=>$value) { $fields_string .= $key.'='.$value.'&'; }
 	    rtrim($fields_string, "&");
@@ -60,10 +63,9 @@ $disqus->get('/as_callback', function (Symfony\Component\HttpFoundation\Request 
 
 	    $auth_results = json_decode($result);
 
-	    if (isset($auth_results->error)) {
-
+	    if (isset($auth_results->error)) 
+	    {
 	        die($auth_results->error);
-	    
 	    }
 
 	    // Extract access token and render
@@ -82,9 +84,9 @@ $disqus->get('/as_callback', function (Symfony\Component\HttpFoundation\Request 
 
 	var_dump($request);
 	return 'df';
-});
+})->bind('disqus_as_callback');
 
-// Debug controllers (local site to test disqus stuf)
+// Debug controllers (local site to test disqus stuff)
 $debug = $app['controllers_factory'];
 
 $debug->get("/", function() use ($app)
