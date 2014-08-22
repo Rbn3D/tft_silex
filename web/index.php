@@ -19,7 +19,7 @@ $disqus->get('/as_callback', function (Symfony\Component\HttpFoundation\Request 
 	if($request->query->get('verify', false))
 	{
 		// Return terms of service
-		
+
 	}
 	else
 	{
@@ -37,7 +37,7 @@ $disqus->get('/as_callback', function (Symfony\Component\HttpFoundation\Request 
 		    'grant_type'=>urlencode("audiencesync"),
 		    'client_id'=>urlencode($app["config"]["disqus.audsync.publickey"]),
 		    'client_secret'=>urlencode($app["config"]["disqus.audsync.secret"]),
-		    'redirect_uri'=>urlencode($app->url('disqus_as_callback') . '?verify=1'),
+		    'redirect_uri'=>urlencode($app->url('disqus_as_callback')),
 		    'code'=>urlencode($code)
 	    );
 
@@ -63,6 +63,8 @@ $disqus->get('/as_callback', function (Symfony\Component\HttpFoundation\Request 
 
 	    $auth_results = json_decode($result);
 
+	    //var_dump($auth_results);
+
 	    if (isset($auth_results->error)) 
 	    {
 	        die($auth_results->error);
@@ -71,19 +73,47 @@ $disqus->get('/as_callback', function (Symfony\Component\HttpFoundation\Request 
 	    // Extract access token and render
 	    $access_token = $auth_results->access_token;
 	    $user_id = $auth_results->user_id;
-	    $success = $request->attributes->parameters['success'];
+	    $success = $request->query->get('success');
 
-	    var_dump($auth_results);
+	    // If success, ask for user details
+	    $url = 'https://disqus.com/api/3.0/users/details.json';
 
-	    $completion_url = $audiencesync_uri . "?client_id=" . constant("DisqusApiPublic") . "&user_id=" . $user_id . "&access_token=" . $access_token . "&success=" . $success;
+		$query = http_build_query(array(
+				'access_token' => $access_token,
+				'api_key' => $app["config"]["disqus.audsync.publickey"],
+				'api_secret' => $app["config"]["disqus.audsync.secret"]
+			));
+
+		$url .= '?'.$query;
+		var_dump($url);
+
+	    //open connection
+	    $ch = curl_init();
+
+	    //set the url, number of POST vars, POST data
+	    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	    curl_setopt($ch,CURLOPT_URL,$url);
+
+	    //execute post
+	    $result = curl_exec($ch);
+
+	    //close connection
+	    curl_close($ch);
+
+	    $user_details = json_decode($result);
+
+	    var_dump($user_details);
+	    var_dump($user_details->response->email);
+
+	    $completion_url = "";
 
 	    /*echo   '<script type="text/javascript">
 	            window.location = "' . $completion_url . '";
 	            </script>';*/
 	}
 
-	var_dump($request);
-	return 'df';
+	//var_dump($request);
+	return '_';
 })->bind('disqus_as_callback');
 
 // Debug controllers (local site to test disqus stuff)

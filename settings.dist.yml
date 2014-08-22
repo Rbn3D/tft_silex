@@ -6,6 +6,3 @@ disqus.audsync.accesstokenurl: ~
 
 disqus.forumname: ~
 disqus.basesiteurl: ~ # Must match the configured forum domain (even if it's localhost)
-
-# Debug
-disqus.audsync.debugaccesstoken: ~ # User access token should be different for each user, but just for debug
