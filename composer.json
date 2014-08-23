@@ -6,6 +6,11 @@
         "twig/twig": "1.16.0"
     },
     "autoload": {
-        "psr-4": { "SilexExtensions\\": "src/SilexExtensions" }
+        "psr-4": { 
+        	"SilexExtensions\\": "src/SilexExtensions",
+        	"TFT\\DAO\\": "src/TFT/DAO", 
+        	"TFT\\Model\\": "src/TFT/Model",
+            "TFT\\Controllers\\": "src/TFT/Controllers"
+        }
     }
 }
