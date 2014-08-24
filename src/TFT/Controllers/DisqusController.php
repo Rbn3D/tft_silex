@@ -11,7 +11,7 @@ class DisqusController implements ControllerProviderInterface
     {
     	$disqus = $app['controllers_factory'];
 
-		$disqus->get('/as_callback', function (Symfony\Component\HttpFoundation\Request $request) use ($app)
+		$disqus->get('/as_callback', function (\Symfony\Component\HttpFoundation\Request $request) use ($app)
 		{
 			if($request->query->get('verify', false))
 			{
@@ -44,19 +44,19 @@ class DisqusController implements ControllerProviderInterface
 			    rtrim($fields_string, "&");
 
 			    //open connection
-			    $ch = curl_init();
+			    $ch = \curl_init();
 
 			    //set the url, number of POST vars, POST data
-			    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			    curl_setopt($ch,CURLOPT_URL,$url);
-			    curl_setopt($ch,CURLOPT_POST,count($fields));
-			    curl_setopt($ch,CURLOPT_POSTFIELDS,$fields_string);
+			    \curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			    \curl_setopt($ch,CURLOPT_URL,$url);
+			    \curl_setopt($ch,CURLOPT_POST,count($fields));
+			    \curl_setopt($ch,CURLOPT_POSTFIELDS,$fields_string);
 
 			    //execute post
-			    $result = curl_exec($ch);
+			    $result = \curl_exec($ch);
 
 			    //close connection
-			    curl_close($ch);
+			    \curl_close($ch);
 
 			    $auth_results = json_decode($result);
 
@@ -85,17 +85,17 @@ class DisqusController implements ControllerProviderInterface
 				var_dump($url);
 
 			    //open connection
-			    $ch = curl_init();
+			    $ch = \curl_init();
 
 			    //set the url, number of POST vars, POST data
-			    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-			    curl_setopt($ch,CURLOPT_URL,$url);
+			    \curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			    \curl_setopt($ch,CURLOPT_URL,$url);
 
 			    //execute post
-			    $result = curl_exec($ch);
+			    $result = \curl_exec($ch);
 
 			    //close connection
-			    curl_close($ch);
+			    \curl_close($ch);
 
 			    $user_details = json_decode($result);
 
