@@ -35,7 +35,7 @@ $app->mount("/disqus", new TFT\Controllers\DisqusController());
 if($app['debug'])
 	$app->mount("/debug", $debug);
 
-if(php_sapi_name() == 'cli') // it's cli, return $app (to allow app/console get it)
+if(php_sapi_name() == 'cli' || defined('testing_env')) // it's cli or we are running unit tests, return $app instead of run the application
 	return $app;
 else
 	$app->run();

@@ -4,10 +4,10 @@ namespace TFT\DAO;
 
 abstract class BaseDAO
 {
-	private $host;
-    private $username;
-    private $password;
-	private $database;
+	protected $host;
+    protected $username;
+    protected $password;
+	protected $database;
 
 	protected $connection = null;
 
@@ -21,23 +21,22 @@ abstract class BaseDAO
 
 	public function openConnection()
 	{
-		try
-		{
-			@$this->conection->close();
-		}
-		finally
+		$this->closeConnection();
+		if(!($this->connection != null && !$this->connection->connect_error))
 		{
 			$this->connection = new \mysqli($this->host, $this->username, $this->password, $this->database);
+			if($error = $this->connection->connect_error)
+				echo $error;
 		}
 	}
 
 	public function closeConnection()
 	{
-		try
+		if($this->connection != null && !$this->connection->connect_error)
 		{
-			@$this->conection->close();
+			$this->connection->close();
+			$this->connection = null;
 		}
-		finally {}
 	}
 
 	public abstract function queryAll();

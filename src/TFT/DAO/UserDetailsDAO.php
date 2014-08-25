@@ -4,8 +4,15 @@ namespace TFT\DAO;
 
 class UserDetailsDAO extends BaseDAO
 {
-	public $disqus_user_id;
-	public $disqus_emai;
+
+	public function __construct($host, $username, $password, $database)
+	{
+		parent::__construct($host, $username, $password, $database);
+		/*$this->host = $host;
+        $this->username = $username;
+        $this->password = $password;
+        $this->database = $database;*/
+	}
 
 	public function queryAll()
 	{
@@ -37,8 +44,8 @@ class UserDetailsDAO extends BaseDAO
 		$user = null;
 		try
 		{
-			$res->fetch_array();
-			$user = $this->build($res);
+			$row = $res->fetch_array();
+			$user = $this->build($row);
 		}
 		finally
 		{
@@ -56,9 +63,7 @@ class UserDetailsDAO extends BaseDAO
 		$disqus_email = $obj->getDisqusEmail();
 		$disqus_user_id = $obj->getDisqusUserId();
 
-		var_dump($obj);
-
-		if(!$this->exists("disqus_user_id", $obj->getDisqusUserId()))
+		if(!$this->exists("disqus_user_id", $disqus_user_id))
 		{
 			$res = $this->executeInsert("INSERT INTO user_details (disqus_user_id, disqus_email) VALUES ('$disqus_user_id','$disqus_email')");
 			echo 'i';
@@ -85,7 +90,7 @@ class UserDetailsDAO extends BaseDAO
 
 	public function build($values)
 	{
-		return new UserDetails($values['disqus_user_id'], $values['disqus_email']);
+		return new \TFT\Model\UserDetails($values['disqus_user_id'], $values['disqus_email']);
 	}
 
 }

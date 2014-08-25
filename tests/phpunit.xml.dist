@@ -10,8 +10,8 @@
          syntaxCheck="true"
 >
     <testsuites>
-        <testsuite name="TFT Silex Test suite">
-            <directory>./</directory>
+        <testsuite name="TFTSilex Test suite">
+            <directory suffix=".php">./TFTSilex</directory>
         </testsuite>
     </testsuites>
 </phpunit>
