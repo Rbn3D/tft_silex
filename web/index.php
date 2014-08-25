@@ -6,6 +6,15 @@ $app = new SilexExtensions\ExtendedSilexApplication();
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new DerAlex\Silex\YamlConfigServiceProvider(__DIR__ . '/../settings.yml'));
 $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__. '/../views'));
+$app->register(new Knp\Provider\ConsoleServiceProvider(), array(
+    'console.name' => 'TFT_Silex command line interface',
+    'console.version' => '1.0.0',
+    'console.project_directory' => __DIR__ . '/..'
+));
+
+$app['daomanager'] = function () use ($app) {
+	return new TFT\DAO\DAOManager($app['config']['mysql']);
+};
 
 $app['debug'] = true;
 
@@ -26,4 +35,7 @@ $app->mount("/disqus", new TFT\Controllers\DisqusController());
 if($app['debug'])
 	$app->mount("/debug", $debug);
 
-$app->run();
+if(php_sapi_name() == 'cli') // it's cli, return $app (to allow app/console get it)
+	return $app;
+else
+	$app->run();

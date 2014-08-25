@@ -5,6 +5,9 @@ namespace TFT\Controllers;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 
+use TFT\DAO;
+use TFT\Model;
+
 class DisqusController implements ControllerProviderInterface
 {
 	public function connect(Application $app)
@@ -101,6 +104,11 @@ class DisqusController implements ControllerProviderInterface
 
 			    var_dump($user_details);
 			    var_dump($user_details->response->email);
+
+			    $user = new UserDetails($user_id, $user_details->response->email);
+
+			    $daoManager = $app['daomanager'];
+			    echo $daoManager->getUsetDetailsDAO()->save($user);
 
 			    $completion_url = "";
 

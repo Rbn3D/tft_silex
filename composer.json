@@ -3,14 +3,16 @@
         "silex/silex": "~1.1",
         "symfony/yaml": "2.5.3",
         "deralex/yaml-config-service-provider": "1.0.0",
-        "twig/twig": "1.16.0"
+        "twig/twig": "1.16.0",
+        "knplabs/console-service-provider": "dev-master"
     },
     "autoload": {
         "psr-4": { 
         	"SilexExtensions\\": "src/SilexExtensions",
         	"TFT\\DAO\\": "src/TFT/DAO", 
         	"TFT\\Model\\": "src/TFT/Model",
-            "TFT\\Controllers\\": "src/TFT/Controllers"
+            "TFT\\Controllers\\": "src/TFT/Controllers",
+            "TFT\\Commands\\": "src/TFT/Commands"
         }
     }
 }

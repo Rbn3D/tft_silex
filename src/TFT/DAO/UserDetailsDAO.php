@@ -59,7 +59,7 @@ class UserDetailsDAO extends BaseDAO
 		$disqus_user_id = $obj->getDisqusUserId();
 
 		if(!$this->exists("disqus_user_id", $obj->getDisqusUserId()))
-			$res =  $this->executeUpdate("INSERT INTO user_details (disqus_user_id, disqus_email) VALUES ('$disqus_user_id','$disqus_email')")
+			$res =  $this->executeInsert("INSERT INTO user_details (disqus_user_id, disqus_email) VALUES ('$disqus_user_id','$disqus_email')")
 		else
 			$res = $this->executeUpdate("UPDATE user_details SET disqus_user_id = '$disqus_user_id', disqus_email = '$disqus_email'");
 

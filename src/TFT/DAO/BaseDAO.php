@@ -27,7 +27,7 @@ abstract class BaseDAO
 		}
 		finally
 		{
-			$this->connection = new mysqli($this->host, $this->username, $this->password, $this->database)
+			$this->connection = new \mysqli($this->host, $this->username, $this->password, $this->database)
 		}
 	}
 
