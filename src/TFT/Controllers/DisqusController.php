@@ -85,7 +85,6 @@ class DisqusController implements ControllerProviderInterface
 					));
 
 				$url .= '?'.$query;
-				var_dump($url);
 
 			    //open connection
 			    $ch = \curl_init();
@@ -102,11 +101,7 @@ class DisqusController implements ControllerProviderInterface
 
 			    $user_details = json_decode($result);
 
-			    var_dump($user_details);
-			    var_dump($user_details->response->email);
-
 			    $user = new \TFT\Model\UserDetails($user_id, $user_details->response->email);
-			    var_dump($user);
 
 			    $daoManager = $app['daomanager'];
 			    $daoManager->getUsetDetailsDAO()->save($user);

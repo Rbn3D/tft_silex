@@ -25,8 +25,8 @@ abstract class BaseDAO
 		if(!($this->connection != null && !$this->connection->connect_error))
 		{
 			$this->connection = new \mysqli($this->host, $this->username, $this->password, $this->database);
-			if($error = $this->connection->connect_error)
-				echo $error;
+			//if($error = $this->connection->connect_error)
+				//echo $error;
 		}
 	}
 
