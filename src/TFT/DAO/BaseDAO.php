@@ -9,7 +9,7 @@ abstract class BaseDAO
     private $password;
 	private $database;
 
-	protected $connection;
+	protected $connection = null;
 
 	public function __construct($host, $username, $password, $database)
 	{
@@ -19,7 +19,7 @@ abstract class BaseDAO
         $this->database = $database;
 	}
 
-	public function openConecction()
+	public function openConnection()
 	{
 		try
 		{
@@ -27,7 +27,7 @@ abstract class BaseDAO
 		}
 		finally
 		{
-			$this->connection = new \mysqli($this->host, $this->username, $this->password, $this->database)
+			$this->connection = new \mysqli($this->host, $this->username, $this->password, $this->database);
 		}
 	}
 
@@ -37,6 +37,7 @@ abstract class BaseDAO
 		{
 			@$this->conection->close();
 		}
+		finally {}
 	}
 
 	public abstract function queryAll();

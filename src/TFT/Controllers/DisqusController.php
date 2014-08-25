@@ -105,10 +105,11 @@ class DisqusController implements ControllerProviderInterface
 			    var_dump($user_details);
 			    var_dump($user_details->response->email);
 
-			    $user = new UserDetails($user_id, $user_details->response->email);
+			    $user = new \TFT\Model\UserDetails($user_id, $user_details->response->email);
+			    var_dump($user);
 
 			    $daoManager = $app['daomanager'];
-			    echo $daoManager->getUsetDetailsDAO()->save($user);
+			    $daoManager->getUsetDetailsDAO()->save($user);
 
 			    $completion_url = "";
 

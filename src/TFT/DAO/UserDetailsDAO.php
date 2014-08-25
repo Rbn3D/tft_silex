@@ -1,8 +1,6 @@
 <?php
 
-namespace TFT\Model;
-
-use TFT\DAO;
+namespace TFT\DAO;
 
 class UserDetailsDAO extends BaseDAO
 {
@@ -45,8 +43,8 @@ class UserDetailsDAO extends BaseDAO
 		finally
 		{
 			$this->closeConnection();
-			return $user;
 		}
+		return $user;
 	}
 
 	public function save($obj)
@@ -58,10 +56,18 @@ class UserDetailsDAO extends BaseDAO
 		$disqus_email = $obj->getDisqusEmail();
 		$disqus_user_id = $obj->getDisqusUserId();
 
+		var_dump($obj);
+
 		if(!$this->exists("disqus_user_id", $obj->getDisqusUserId()))
-			$res =  $this->executeInsert("INSERT INTO user_details (disqus_user_id, disqus_email) VALUES ('$disqus_user_id','$disqus_email')")
+		{
+			$res = $this->executeInsert("INSERT INTO user_details (disqus_user_id, disqus_email) VALUES ('$disqus_user_id','$disqus_email')");
+			echo 'i';
+		}
 		else
-			$res = $this->executeUpdate("UPDATE user_details SET disqus_user_id = '$disqus_user_id', disqus_email = '$disqus_email'");
+		{
+			$res = $this->executeUpdate("UPDATE user_details SET disqus_email = '$disqus_email' WHERE disqus_user_id = '$disqus_user_id'");
+			echo 'u';
+		}
 
 		$this->closeConnection();
 		return $res;
