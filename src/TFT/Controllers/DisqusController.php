@@ -127,7 +127,7 @@ class DisqusController implements ControllerProviderInterface
 	    			'audiencesync_uri'=>urlencode($audiencesync_uri)
 	    		));
 
-	    	return $app['twig']->render('disqus_as_tos.twig', array('accept_url'=>$accept_url));
+	    	return $app['twig']->render('disqus_as_tos.twig', array());
 	    })->bind('disqus_as_callback_tos');
 
         return $disqus;

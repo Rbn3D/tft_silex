@@ -39,7 +39,7 @@ class SchemaCommand extends Command
 
         	$link->query("CREATE DATABASE IF NOT EXISTS $db");
         	$link->query("USE $db");
-        	$link->query("CREATE TABLE IF NOT EXISTS user_details(disqus_user_id VARCHAR(65) PRIMARY KEY, disqus_email VARCHAR(150))");	
+        	$link->query("CREATE TABLE IF NOT EXISTS user_details(disqus_user_id VARCHAR(20) PRIMARY KEY, disqus_email VARCHAR(150) NOT NULL UNIQUE)");	
 
         	$link->close();
         	$output->writeln('<info>Schema created successfully (It does NOT recreate tables that already exists, you can use "schema drop" to drop them first)</info>');
