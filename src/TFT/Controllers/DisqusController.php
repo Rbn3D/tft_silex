@@ -96,7 +96,7 @@ class DisqusController implements ControllerProviderInterface
 
 		    $user = new \TFT\Model\UserDetails($user_id, $user_details->response->email);
 
-		    $daoManager = $app['daomanager'];
+		    $daoManager = $app['dao_manager'];
 		    $daoManager->getUsetDetailsDAO()->save($user);
 
 		    // Finalize process
@@ -115,20 +115,9 @@ class DisqusController implements ControllerProviderInterface
 
 	    $disqus->get('/as_callback/tos', function (\Symfony\Component\HttpFoundation\Request $request) use ($app)
 	    {
-	    	//var_dump($request);
-	    	$user_id = $request->request->get('user_id');
-	    	$code = $request->request->get('user_id');
-	    	$audiencesync_uri = $request->request->get('audiencesync_uri');
-
-	    	$accept_url = $app->url('disqus_as_callback', array(
-	    			'user_id'=>$user_id,
-	    			'success'=>1,
-	    			'code'=>$code,
-	    			'audiencesync_uri'=>urlencode($audiencesync_uri)
-	    		));
-
 	    	return $app['twig']->render('disqus_as_tos.twig', array());
-	    })->bind('disqus_as_callback_tos');
+	    })
+	    ->bind('disqus_as_callback_tos');
 
         return $disqus;
     }

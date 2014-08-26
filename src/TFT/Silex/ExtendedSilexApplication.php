@@ -1,6 +1,6 @@
 <?php
 
-namespace SilexExtensions;
+namespace TFT\Silex;
 
 use \Silex\Application;
 

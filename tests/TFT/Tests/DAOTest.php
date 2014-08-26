@@ -1,27 +1,11 @@
 <?php
-namespace TFTSilex\Tests;
-
-require_once __DIR__.'/../../../vendor/autoload.php';
+namespace TFT\Tests;
 
 use Silex\WebTestCase;
 use TFT\Model;
 
-class DAOTest extends WebTestCase
+class DAOTest extends TFTSilex\Tests\BaseTestCase
 {
-    public function createApplication()
-    {
-    	if(!defined('testing_env'))
-    		define('testing_env', 1);
-    	
-        $app = require __DIR__.'/../../../web/index.php';
-
-        $app['debug'] = true;
-	    $app['exception_handler']->disable();
-
-	    $this->app = $app;
-	    return $app;
-    }
-
     public function testCreateUserDetails()
     {
         $dao = $this->app['daomanager']->getUsetDetailsDAO();

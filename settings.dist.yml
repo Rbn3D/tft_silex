@@ -7,6 +7,8 @@ disqus.audsync.accesstokenurl: ~
 disqus.forumname: ~
 disqus.basesiteurl: ~ # Must match the configured forum domain (even if it's localhost)
 
+disqus.audsync.debug.accesstoken: ~ # Your access token from your Disqus Application (for testing porpouses)
+
 mysql:
   host: ~
   username: ~

@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$app = new SilexExtensions\ExtendedSilexApplication();
+$app = new TFT\Silex\ExtendedSilexApplication();
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new DerAlex\Silex\YamlConfigServiceProvider(__DIR__ . '/../settings.yml'));
 $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__. '/../views'));
@@ -12,8 +12,11 @@ $app->register(new Knp\Provider\ConsoleServiceProvider(), array(
     'console.project_directory' => __DIR__ . '/..'
 ));
 
-$app['daomanager'] = function () use ($app) {
+$app['dao_manager'] = function () use ($app) {
 	return new TFT\DAO\DAOManager($app['config']['mysql']);
+};
+$app['oauth_manager'] = function () use ($app) {
+	return new TFT\OAuth\OAuthManager($app);
 };
 
 $app['debug'] = true;

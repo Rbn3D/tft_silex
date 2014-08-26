@@ -12,12 +12,12 @@
     },
     "autoload": {
         "psr-4": { 
-        	"SilexExtensions\\": "src/SilexExtensions",
-        	"TFT\\DAO\\": "src/TFT/DAO", 
-        	"TFT\\Model\\": "src/TFT/Model",
-            "TFT\\Controllers\\": "src/TFT/Controllers",
-            "TFT\\Commands\\": "src/TFT/Commands",
-            "TFTSilex\\Tests\\": "tests/TFTSilex/Tests"
+        	"": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "": "tests/"
         }
     }
 }
