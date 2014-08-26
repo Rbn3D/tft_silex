@@ -2,6 +2,7 @@
 
 namespace TFT\OAuth;
 
+use TFT\OAuth\HTTPMethod;
 class OAuthManager
 {
 	/**
@@ -14,21 +15,21 @@ class OAuthManager
 		$this->app = $app;
 	}
 
-	public function requestAccessToken(string $code)
+	public function requestAccessToken($code)
 	{
 		$url = 'https://disqus.com/api/oauth/2.0/access_token/';
 		$fields = array(
 		    'grant_type'=>"audiencesync",
-		    'client_id'=>$app["config"]["disqus.audsync.publickey"],
-		    'client_secret'=>$app["config"]["disqus.audsync.secret"],
-		    'redirect_uri'=>$app->url('disqus_as_callback'),
+		    'client_id'=>$this->app["config"]["disqus.audsync.publickey"],
+		    'client_secret'=>$this->app["config"]["disqus.audsync.secret"],
+		    'redirect_uri'=>$this->app->url('disqus_as_callback'),
 		    'code'=>$code
 	    );
 
 		return $this->call($url, $fields, HTTPMethod::POST);
 	}
 
-	public function call (string $url, array $parameters = array(), HTTPMethod $method)
+	public function call ($url, $parameters = array(), $method = HTTPMethod::GET)
 	{
 		$query = http_build_query($parameters);
 

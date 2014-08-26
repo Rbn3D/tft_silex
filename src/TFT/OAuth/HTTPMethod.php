@@ -2,7 +2,7 @@
 
 namespace TFT\OAuth;
 
-class HTTPMethod extends SplEnum 
+class HTTPMethod
 {
     const __default = self::GET;
     
