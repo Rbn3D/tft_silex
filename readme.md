@@ -12,13 +12,13 @@ Project setup:
    
 tft_silex folder should be a subfolder of your root www folder (otherwise, you will have to manually modify the .htaccess files)
 
-> Composer
+Composer
 
 > ```sh
 composer.phar update
 ```
 
-> settings.yml file
+settings.yml file
 
 > You will have to copy _settings.dist.yml_ to _seetings.yml_ and set the correct values for your configuration
 
