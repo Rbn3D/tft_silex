@@ -47,7 +47,7 @@ Truncate data in schema
 php app/console schema truncate
 ```
 
-Drop schema (without actually deleting the databse or other tables)
+Drop schema (without actually deleting the database or other tables)
 > ```sh
 php app/console schema drop
 ```
