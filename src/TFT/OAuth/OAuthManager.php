@@ -29,6 +29,18 @@ class OAuthManager
 		return $this->call($url, $fields, HTTPMethod::POST);
 	}
 
+	public function requestUserDetails($access_token)
+	{
+		$url = 'https://disqus.com/api/3.0/users/details.json';
+		$fields = array(
+				'access_token' => $access_token,
+				'api_key' => $this->app["config"]["disqus.audsync.publickey"],
+				'api_secret' => $this->app["config"]["disqus.audsync.secret"]
+	    );
+
+		return $this->call($url, $fields, HTTPMethod::GET);
+	}
+
 	public function call ($url, $parameters = array(), $method = HTTPMethod::GET)
 	{
 		$query = http_build_query($parameters);
