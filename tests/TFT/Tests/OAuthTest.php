@@ -1,11 +1,13 @@
 <?php
 namespace TFT\Tests;
-require_once __DIR__.'/../../../vendor/autoload.php';
 
+use TFT\Tests\BaseTestCase;
+use Silex\WebTestCase;
 use TFT\OAuth;
 
-class OAuthTest extends BaseTestCase
+class OAuthTest extends WebTestCase
 {
+	use BaseTestCase;
 	public function testRequestAccessToken()
 	{
 		$oauthManager = $this->app['oauth_manager'];

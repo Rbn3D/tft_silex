@@ -28,7 +28,7 @@ class OAuthManager
 		return $this->call($url, $fields, HTTPMethod::POST);
 	}
 
-	public function call (string $url, array $parameters = array(), HTTPMethod $method = HTTPMethod::GET)
+	public function call (string $url, array $parameters = array(), HTTPMethod $method)
 	{
 		$query = http_build_query($parameters);
 
@@ -54,7 +54,7 @@ class OAuthManager
 	    $result = json_decode($ch_result);
 
 	   	if (isset($result->error)) 
-	        trhow new OAuthException($result->error);
+	        throw new OAuthException($result->error);
 
 		return $result;
 	}

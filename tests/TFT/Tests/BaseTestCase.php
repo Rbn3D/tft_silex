@@ -1,7 +1,11 @@
 <?php
 namespace TFT\Tests;
+require_once __DIR__.'/../../../vendor/autoload.php';
 
-abstract class BaseTestCase
+if(!defined('testing_env'))
+	define('testing_env', 1);
+
+trait BaseTestCase
 {
 	public function createApplication()
     {    	

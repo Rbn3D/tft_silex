@@ -1,14 +1,16 @@
 <?php
 namespace TFT\Tests;
 
+use TFT\Tests\BaseTestCase;
 use Silex\WebTestCase;
 use TFT\Model;
 
-class DAOTest extends TFTSilex\Tests\BaseTestCase
+class DAOTest extends WebTestCase
 {
+    use BaseTestCase;
     public function testCreateUserDetails()
     {
-        $dao = $this->app['daomanager']->getUsetDetailsDAO();
+        $dao = $this->app['dao_manager']->getUsetDetailsDAO();
         $dao->save(new \TFT\Model\UserDetails('2572652asfas', '2test@mail.com'));
         //$user = $this->app['daomanager']->getUsetDetailsDAO()->queryOneBy("disqus_user_id", '2572652');
 
@@ -18,7 +20,7 @@ class DAOTest extends TFTSilex\Tests\BaseTestCase
 
     public function testQueryAll()
     {
-    	$dao = $this->app['daomanager']->getUsetDetailsDAO();
+    	$dao = $this->app['dao_manager']->getUsetDetailsDAO();
     	$users = $dao->queryAll();
 
     	var_dump($users);
