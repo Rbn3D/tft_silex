@@ -1,6 +1,6 @@
 <?php
 
-namespace TFT\Commands;
+namespace AudSync\Commands;
 
 use Knp\Command\Command;
 

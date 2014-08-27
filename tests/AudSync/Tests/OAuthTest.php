@@ -1,9 +1,9 @@
 <?php
-namespace TFT\Tests;
+namespace AudSync\Tests;
 
-use TFT\Tests\BaseTestCase;
+use AudSync\Tests\BaseTestCase;
 use Silex\WebTestCase;
-use TFT\OAuth;
+use AudSync\OAuth;
 
 class OAuthTest extends WebTestCase
 {

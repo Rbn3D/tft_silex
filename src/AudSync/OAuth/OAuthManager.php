@@ -1,8 +1,8 @@
 <?php
 
-namespace TFT\OAuth;
+namespace AudSync\OAuth;
 
-use TFT\OAuth\HTTPMethod;
+use AudSync\OAuth\HTTPMethod;
 /**
 * OAuthManager
 *

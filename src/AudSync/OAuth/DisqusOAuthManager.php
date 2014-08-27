@@ -1,6 +1,6 @@
 <?php
 
-namespace TFT\OAuth;
+namespace AudSync\OAuth;
 
 /**
 * Provides high level methods to interact with the Disqus Audience Sync API

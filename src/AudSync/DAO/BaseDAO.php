@@ -1,6 +1,6 @@
 <?php
 
-namespace TFT\DAO;
+namespace AudSync\DAO;
 
 abstract class BaseDAO
 {

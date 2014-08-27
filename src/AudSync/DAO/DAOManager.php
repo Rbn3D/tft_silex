@@ -1,6 +1,6 @@
 <?php
 
-namespace TFT\DAO;
+namespace AudSync\DAO;
 use \Silex\Application;
 
 class DAOManager

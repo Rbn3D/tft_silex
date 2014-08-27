@@ -1,6 +1,6 @@
 <?php
 
-namespace TFT\Model;
+namespace AudSync\Model;
 
 class UserDetails
 {

@@ -1,5 +1,5 @@
 <?php
-namespace TFT\Tests;
+namespace AudSync\Tests;
 require_once __DIR__.'/../../../vendor/autoload.php';
 
 if(!defined('testing_env'))

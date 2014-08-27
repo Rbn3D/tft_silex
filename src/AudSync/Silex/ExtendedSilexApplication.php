@@ -1,6 +1,6 @@
 <?php
 
-namespace TFT\Silex;
+namespace AudSync\Silex;
 
 use \Silex\Application;
 

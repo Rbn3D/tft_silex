@@ -1,9 +1,9 @@
 <?php
-namespace TFT\Tests;
+namespace AudSync\Tests;
 
-use TFT\Tests\BaseTestCase;
+use AudSync\Tests\BaseTestCase;
 use Silex\WebTestCase;
-use TFT\Model;
+use AudSync\Model;
 
 class DAOTest extends WebTestCase
 {
@@ -11,10 +11,10 @@ class DAOTest extends WebTestCase
     public function testCreateUserDetails()
     {
         $dao = $this->app['dao_manager']->getUsetDetailsDAO();
-        $dao->save(new \TFT\Model\UserDetails('2572652asfas', '2test@mail.com'));
+        $dao->save(new \AudSync\Model\UserDetails('2572652asfas', '2test@mail.com'));
         //$user = $this->app['daomanager']->getUsetDetailsDAO()->queryOneBy("disqus_user_id", '2572652');
 
-        $user = new \TFT\Model\UserDetails('2572652', 'test@mail.com');
+        $user = new \AudSync\Model\UserDetails('2572652', 'test@mail.com');
         $this->assertSame((string) '2572652', (string) $user->getDisqusUserId());
     }
 

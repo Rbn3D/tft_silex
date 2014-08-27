@@ -2,7 +2,7 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-$app = new TFT\Silex\ExtendedSilexApplication();
+$app = new AudSync\Silex\ExtendedSilexApplication();
 $app->register(new Silex\Provider\UrlGeneratorServiceProvider());
 $app->register(new DerAlex\Silex\YamlConfigServiceProvider(__DIR__ . '/../settings.yml'));
 $app->register(new Silex\Provider\TwigServiceProvider(), array('twig.path' => __DIR__. '/../views'));
@@ -13,10 +13,10 @@ $app->register(new Knp\Provider\ConsoleServiceProvider(), array(
 ));
 
 $app['dao_manager'] = function () use ($app) {
-	return new TFT\DAO\DAOManager($app['config']['mysql']);
+	return new AudSync\DAO\DAOManager($app['config']['mysql']);
 };
 $app['disqus_oauth_manager'] = function () use ($app) {
-	return new TFT\OAuth\DisqusOAuthManager($app);
+	return new AudSync\OAuth\DisqusOAuthManager($app);
 };
 
 $app['debug'] = true;
@@ -33,7 +33,7 @@ $debug->get("/", function() use ($app)
 });
 
 
-$app->mount("/disqus", new TFT\Controllers\DisqusController());
+$app->mount("/disqus", new AudSync\Controllers\DisqusController());
 
 if($app['debug'])
 	$app->mount("/debug", $debug);

@@ -1,6 +1,6 @@
 <?php
 
-namespace TFT\OAuth;
+namespace AudSync\OAuth;
 
 use Exception;
 

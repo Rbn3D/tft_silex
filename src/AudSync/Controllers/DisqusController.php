@@ -1,12 +1,12 @@
 <?php
 
-namespace TFT\Controllers;
+namespace AudSync\Controllers;
 
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 
-use TFT\DAO;
-use TFT\Model;
+use AudSync\DAO;
+use AudSync\Model;
 
 class DisqusController implements ControllerProviderInterface
 {
@@ -30,7 +30,7 @@ class DisqusController implements ControllerProviderInterface
 			    $user_details = $oauthManager->requestDisqusUserDetails($access_token);
 
 			    // Persist user details
-			    $user = new \TFT\Model\UserDetails($user_id, $user_details->response->email);
+			    $user = new \AudSync\Model\UserDetails($user_id, $user_details->response->email);
 			    $daoManager = $app['dao_manager'];
 			    $daoManager->getUsetDetailsDAO()->save($user);
 

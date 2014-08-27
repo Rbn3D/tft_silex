@@ -1,6 +1,6 @@
 <?php
 
-namespace TFT\DAO;
+namespace AudSync\DAO;
 
 class UserDetailsDAO extends BaseDAO
 {
@@ -83,7 +83,7 @@ class UserDetailsDAO extends BaseDAO
 
 	public function build($values)
 	{
-		return new \TFT\Model\UserDetails($values['disqus_user_id'], $values['disqus_email']);
+		return new \AudSync\Model\UserDetails($values['disqus_user_id'], $values['disqus_email']);
 	}
 
 }
