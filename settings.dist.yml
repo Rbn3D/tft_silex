@@ -3,11 +3,10 @@
 disqus.audsync.publickey: ~
 disqus.audsync.secret: ~
 disqus.audsync.accesstokenurl: ~
+disqus.audsync.redirect_uri: ~ # Only used if you invoke the Audience Sync login manually by using DisqusOAuthManager->getAudienceSyncAuthorizationURL()
 
 disqus.forumname: ~
 disqus.basesiteurl: ~ # Must match the configured forum domain (even if it's localhost)
-
-disqus.audsync.debug.accesstoken: ~ # Your access token from your Disqus Application (for testing porpouses)
 
 mysql:
   host: ~

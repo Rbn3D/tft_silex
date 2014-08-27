@@ -56,23 +56,43 @@ class DisqusOAuthManager extends OAuthManager
 	}
 
     /**
-     * Returns the Audience Sync completion URL where you should redirect the user after you have readed the data you need
+     * Returns the Audience Sync completion URL where you must redirect the user after you have readed the data you need and performed any additional steps
      * 
-     * @param mixed $audiencesync_uri The Audience Sync uri that Disqus sents using POST to the Audience Sync callback URL.
-     * @param mixed $access_token     The Audience Sync access token.
-     * @param mixed $user_id          The user_id.
+     * @param mixed $audiencesync_uri The Audience Sync uri that Disqus sents using POST to the Audience Sync callback URL
+     * @param mixed $access_token     The Audience Sync access token
+     * @param mixed $user_id          The user_id
+     * @param mixed $success          An integer value indicating if we had success processing and validating the user data (must be 1 for a successful completion or 0 for a failure). Defaults to 1.
      *
      * @access public
      *
      * @return mixed The generated URL.
      */
-	public function getDisqusCompletionURL($audiencesync_uri, $access_token, $user_id)
+	public function getDisqusCompletionURL($audiencesync_uri, $access_token, $user_id, $success = 1)
 	{
 		return $audiencesync_uri ."?". http_build_query(array(
 				'client_id'=>$this->app["config"]["disqus.audsync.publickey"],
 				'user_id'=>$user_id,
 				'access_token'=>$access_token,
-				'success'=>1
+				'success'=>$success
+			));
+	}
+
+    /**
+     * Returns the URL where you must redirect the user to authorize you to use their account through Audience Sync. (No neccesary if you use the embeed Audience Sync implementation)
+     * 
+     * @access public
+     *
+     * @return mixed Value.
+     */
+	public function getAudienceSyncAuthorizationURL()
+	{
+		$url = 'https://disqus.com/api/oauth/2.0/authorize/';
+
+		return $url ."?". http_build_query(array(
+				'client_id'=>$this->app["config"]["disqus.audsync.publickey"],
+				'response_type'=>'audiencesync',
+				'forum_id'=>$this->app["config"]['disqus.forumname'],
+				'redirect_uri'=>$this->app["config"]['disqus.audsync.redirect_uri']
 			));
 	}
 }

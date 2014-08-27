@@ -13,7 +13,7 @@ class OAuthManager
 	/**
 	 * @var \Silex\Application A reference to the Silex Application
 	 */
-	private $app;
+	protected $app;
 
     /**
      * Creates a new {@link OAuthManager} instance 

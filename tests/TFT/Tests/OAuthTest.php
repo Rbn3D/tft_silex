@@ -10,9 +10,8 @@ class OAuthTest extends WebTestCase
 	use BaseTestCase;
 	public function testRequestAccessToken()
 	{
-		$oauthManager = $this->app['oauth_manager'];
-		$code = $this->app['config']['disqus.audsync.debug.accesstoken'];
+		$oauthManager = $this->app['disqus_oauth_manager'];
 
-		var_dump($result=$oauthManager->requestAccessToken($code));
+		var_dump($oauthManager->getAudienceSyncAuthorizationURL());
 	}
 }
