@@ -15,8 +15,8 @@ $app->register(new Knp\Provider\ConsoleServiceProvider(), array(
 $app['dao_manager'] = function () use ($app) {
 	return new TFT\DAO\DAOManager($app['config']['mysql']);
 };
-$app['oauth_manager'] = function () use ($app) {
-	return new TFT\OAuth\OAuthManager($app);
+$app['disqus_oauth_manager'] = function () use ($app) {
+	return new TFT\OAuth\DisqusOAuthManager($app);
 };
 
 $app['debug'] = true;

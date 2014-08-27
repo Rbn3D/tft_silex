@@ -3,6 +3,11 @@
 namespace TFT\OAuth;
 
 use TFT\OAuth\HTTPMethod;
+/**
+* OAuthManager
+*
+* @author   Rubén Vallejo Gamboa <ruben3d3@gmail.com>
+*/
 class OAuthManager
 {
 	/**
@@ -10,37 +15,33 @@ class OAuthManager
 	 */
 	private $app;
 
+    /**
+     * Creates a new {@link OAuthManager} instance 
+     * 
+     * @param \Silex\Application $app A reference to the Silex Application.
+     *
+     * @access public
+     *
+     * @return OAuthManager The created instance.
+     */
 	public function __construct($app)
 	{
 		$this->app = $app;
 	}
 
-	public function requestAccessToken($code)
-	{
-		$url = 'https://disqus.com/api/oauth/2.0/access_token/';
-		$fields = array(
-		    'grant_type'=>"audiencesync",
-		    'client_id'=>$this->app["config"]["disqus.audsync.publickey"],
-		    'client_secret'=>$this->app["config"]["disqus.audsync.secret"],
-		    'redirect_uri'=>$this->app->url('disqus_as_callback'),
-		    'code'=>$code
-	    );
-
-		return $this->call($url, $fields, HTTPMethod::POST);
-	}
-
-	public function requestUserDetails($access_token)
-	{
-		$url = 'https://disqus.com/api/3.0/users/details.json';
-		$fields = array(
-				'access_token' => $access_token,
-				'api_key' => $this->app["config"]["disqus.audsync.publickey"],
-				'api_secret' => $this->app["config"]["disqus.audsync.secret"]
-	    );
-
-		return $this->call($url, $fields, HTTPMethod::GET);
-	}
-
+    /**
+     * Performs an HTTP request
+     * 
+     * @param mixed $url        The URL to be requested.
+     * @param array $parameters A key value array with the parameters to be sent to the server. No needed to use urlencode(). Empty by default.
+     * @param mixed $method     HTTP Method. Should be HTTPMethod::GET or HTTPMethod::POST. HTTPMethod::GET by default.
+     *
+     * @access public
+     *
+     * @throws OAuthException if the server returns an error, containing the error message.
+     *
+     * @return array A key-value array with the data (decoded from JSON) returned from the server.
+     */
 	public function call ($url, $parameters = array(), $method = HTTPMethod::GET)
 	{
 		$query = http_build_query($parameters);

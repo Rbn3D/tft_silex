@@ -1,5 +1,14 @@
 {
+    "name": "rbn3d/silex-audiencesync",
+    "description": "A silex project to manage Disqus Audience sync authentication process",
+    "authors": [
+        {
+            "name": "Rubén Vallejo Gamboa",
+            "email": "ruben3d3@gmail.com"
+        }
+    ],
     "require": {
+        "php": ">=5.4",
         "silex/silex": "~1.1",
         "symfony/yaml": "2.5.3",
         "deralex/yaml-config-service-provider": "1.0.0",
